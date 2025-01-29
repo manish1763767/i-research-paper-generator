@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Paper Results</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Research Paper Results</h1>
+    </header>
+    <main>
+        <p>Your research paper has been generated successfully!</p>
+        <a id="downloadLink" href="#" download>Download Your Research Paper</a>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const file = urlParams.get('file');
+            if (file) {
+                document.getElementById('downloadLink').href = '/download?file=' + encodeURIComponent(file);
+            } else {
+                alert('No file found to download.');
+            }
+        });
+    </script>
+</body>
+</html>

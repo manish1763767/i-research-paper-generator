@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Research Paper Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Submit Research Paper Details</h1>
+    </header>
+    <main>
+        <form id="researchForm" action="/generate" method="POST">
+            <label for="topic">Topic of the Research Paper:</label>
+            <input type="text" id="topic" name="topic" required>
+
+            <label for="additionalInfo">Additional Information:</label>
+            <textarea id="additionalInfo" name="additionalInfo" rows="4" required></textarea>
+
+            <label for="suggestedLiterature">Suggested Literature (Optional):</label>
+            <textarea id="suggestedLiterature" name="suggestedLiterature" rows="4"></textarea>
+
+            <label for="dataSources">Data Sources:</label>
+            <textarea id="dataSources" name="dataSources" rows="4" required></textarea>
+
+            <label for="fileFormat">Preferred File Format:</label>
+            <select id="fileFormat" name="fileFormat" required>
+                <option value="latex">LaTeX</option>
+                <option value="word">Word</option>
+            </select>
+
+            <button type="submit">Generate Research Paper</button>
+        </form>
+    </main>
+    <script src="scripts.js"></script>
+</body>
+</html>
