@@ -15,15 +15,23 @@ app.post('/generate', async (req, res) => {
     const { topic, additionalInfo, suggestedLiterature, dataSources, fileFormat } = req.body;
 
     try {
-        const response = await axios.post('https://api.github.com/repos/your-repo/your-model-endpoint', {
-            topic,
-            additionalInfo,
-            suggestedLiterature,
-            dataSources,
-            fileFormat
+        const response = await axios.post('https://models.inference.ai.azure.com/chat/completions', {
+            headers: {
+                'Authorization': `Bearer ${process.env.GITHUB_TOKEN}`
+            },
+            body: {
+                messages: [
+                    { role: "system", content: "" },
+                    { role: "user", content: `Generate a research paper on ${topic}. Additional information: ${additionalInfo}. Suggested literature: ${suggestedLiterature}. Data sources: ${dataSources}.` }
+                ],
+                model: "Llama-3.3-70B-Instruct",
+                temperature: 0.8,
+                max_tokens: 2048,
+                top_p: 0.1
+            }
         });
 
-        const fileContent = response.data;
+        const fileContent = response.data.choices[0].message.content;
         const fileExtension = fileFormat === 'latex' ? 'tex' : 'docx';
         const fileName = `research_paper_${uuidv4()}.${fileExtension}`;
         const filePath = path.join(__dirname, 'generated', fileName);
